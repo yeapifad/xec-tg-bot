@@ -1,0 +1,28 @@
+services:
+  - type: web
+    name: xec-engage-bot
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: python bot.py
+    envVars:
+      - key: BOT_TOKEN
+        sync: false
+      - key: ADMIN_IDS
+        sync: false
+      - key: ENGAGE_GROUP_ID
+        sync: false
+      - key: WEBHOOK_URL
+        sync: false
+      - key: WEBHOOK_SECRET
+        sync: false
+      - key: REPORT_API_KEY
+        sync: false
+      - key: DB_PATH
+        value: /var/data/xec.db
+      - key: PORT
+        value: "8000"
+    disk:
+      name: xec-data
+      mountPath: /var/data
+      sizeGB: 1
+    healthCheckPath: /healthz
